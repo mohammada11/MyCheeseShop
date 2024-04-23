@@ -23,7 +23,14 @@ namespace MyCheeseShop.Context
         {
             await _context.Database.MigrateAsync();
 
-            if (!_context.Users.Any())
+            if (!_context.Cheeses.Any())
+            {
+                var cheeses = GetCheeses();
+                _context.Cheeses.AddRange(cheeses);
+                await _context!.SaveChangesAsync();
+            }
+
+            if (!_context.Users.Any()) 
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole("Customers"));
@@ -45,12 +52,7 @@ namespace MyCheeseShop.Context
                 await _userManager.CreateAsync(admin, adminPassword);
                 await _userManager.AddToRoleAsync(admin, "Admin");
 
-                if(!_context.Cheeses.Any())
-                {
-                    var cheeses = GetCheeses();
-                    _context.Cheeses.AddRange(cheeses);
-                    await _context!.SaveChangesAsync();
-                }
+             
 
             }
         }

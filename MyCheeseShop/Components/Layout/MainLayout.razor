@@ -16,6 +16,9 @@
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                 <AuthorizeView>
                     <Authorized>
+                        <AuthorizeView Roles="Admin" Context="innerContext">
+                            <span class="navbar-text me-1"> Admin </span>
+                        </AuthorizeView>
                         <li class="navbar-text"> @context.User.Identity?.Name </li>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/Account/Logout" Match="NavLinkMatch.All">Logout</NavLink>
