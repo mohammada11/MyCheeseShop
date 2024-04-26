@@ -1,16 +1,20 @@
 ﻿@using MyCheeseShop.Model
-
-<div class="card" style="width: 18rem;">
-
-    <img src="..." class="card-img-top" alt="...">
+ 
+<div class="card h-100">
+      <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
     <div class="card-body">
-        <span class="badge bg-success">@Cheese.Type</span>
-        <span class="badge bg-danger">@Cheese.Strength</span>
-        <h5 class="card-title"> @Cheese.Name</h5>
-        <p class="card-text"> @Cheese.Description</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h6>
+            <span class="badge bg-success">@Cheese.Type</span>
+            <span class="badge bg-danger">@Cheese.Strength</span>
+            <span class="badge bg-warning">@Cheese.Price</span>
+        </h6>
+        <div class="d-flex flex-column mb-3"> 
+          <h5 class="card-title"> @Cheese.Name</h5>
+          <p class="card-text"> @Cheese.Description</p>
+        </div>
     </div>
 </div>
+
 
 @code {
 
