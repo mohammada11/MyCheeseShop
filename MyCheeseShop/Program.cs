@@ -18,7 +18,7 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddScoped<ShoppingCart>();
-
+builder.Services.AddScoped<CheeseProvider>();
 builder.Services.AddIdentityCore<User>()
  .AddRoles<IdentityRole>()
  .AddEntityFrameworkStores<DatabaseContext>()
@@ -37,7 +37,7 @@ builder.Services.AddIdentityCore<User>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddSignInManager();
 
-builder.Services.AddScoped<CheeseProvider>();
+
 
 builder.Services.AddScoped<DatabaseSeeder>();
 var app = builder.Build();

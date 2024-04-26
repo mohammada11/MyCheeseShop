@@ -1,0 +1,28 @@
+﻿@using MyCheeseShop.Model
+
+<div class="card" style="width: 18rem;">
+
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <span class="badge bg-success">@Cheese.Type</span>
+        <span class="badge bg-danger">@Cheese.Strength</span>
+        <h5 class="card-title"> @Cheese.Name</h5>
+        <p class="card-text"> @Cheese.Description</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Cheese Cheese { get; set; }
+    private int quantity = 1;
+
+
+
+    public async Task AddToCart()
+    {
+        
+    }
+
+}
