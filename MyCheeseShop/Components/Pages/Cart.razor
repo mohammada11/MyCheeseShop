@@ -1,0 +1,22 @@
+﻿@page "/cart"
+@inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
+@using MyCheeseShop.Model
+
+@code 
+{
+    protected override void OnInitialized()
+    {
+        ShoppingCart.OnCartUpdated += StateHasChanged;
+    }
+
+    protected void GoToStore()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    protected void GoToCheckout()
+    {
+        NavigationManager.NavigateTo("/checkout");
+    }
+}

@@ -1,16 +1,47 @@
-﻿@using MyCheeseShop.Model
- 
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Model
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject ShoppingCart ShoppingCart
+
 <div class="card h-100">
       <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
     <div class="card-body">
-        <h6>
+        <div class="d-flex flex-column">
+            <h6>
             <span class="badge bg-success">@Cheese.Type</span>
             <span class="badge bg-danger">@Cheese.Strength</span>
             <span class="badge bg-warning">@Cheese.Price</span>
         </h6>
-        <div class="d-flex flex-column mb-3"> 
-          <h5 class="card-title"> @Cheese.Name</h5>
-          <p class="card-text"> @Cheese.Description</p>
+            <div class="d-flex flex-column mb-3"> 
+            <h5 class="card-title"> @Cheese.Name</h5>
+            <p class="card-text"> @Cheese.Description</p>
+            </div>
+            <div class="mt-auto">
+            <EditForm Model="quantity" OnSubmit="AddToCart">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <InputSelect class="form-select w-100" @bind-Value="quantity" required>
+                            @for (var i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@(i*100)g</option>
+                            }
+                        </InputSelect>
+                    </div>
+                <div class="col-lg-6 col-12 mt-lg-0 mt-1">
+                    <button class="btn btn-primary position-relative w-75">
+                        Add to cart
+                        @if (ShoppingCart.GetQuantity(Cheese) > 0)
+                        {
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @(ShoppingCart.GetQuantity(Cheese) * 100)g
+                                <span class="visually-hidden">@Cheese.Name in shopping cart</span>
+                            </span>
+                        }
+                    </button>
+                    </div>
+                </div>
+            </EditForm>
+           </div>
         </div>
     </div>
 </div>
@@ -26,7 +57,8 @@
 
     public async Task AddToCart()
     {
-        
+        ShoppingCart.AddItem(Cheese, quantity);
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
 }

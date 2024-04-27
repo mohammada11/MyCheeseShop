@@ -3,9 +3,15 @@
 @using MyCheeseShop.Model
 @page "/"
 @inject CheeseProvider CheeseProvider
+@inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
 
 
 <PageTitle>MyCheeseShop - The World's Best Cheeses!</PageTitle>
+
+<div class="d-flex justify-content-end mt-2 mt-md-0">
+    <a @onclick="GoToCart" class="btn btn-outline-primary"> Cart </a>
+</div>
 
 <div class="row">
 @foreach (var cheese in cheeses)
@@ -51,8 +57,13 @@
     {
         cheeses = await CheeseProvider.GetAllCheesesAsync();
         filteredCheeses = cheeses;
-        
-  
+        ShoppingCart.OnCartUpdated += StateHasChanged;
+
+    }
+
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
     }
 
     private bool GetSearchCriteria(Cheese cheese)
@@ -66,5 +77,6 @@
 
     }
 
+    
  }
 
