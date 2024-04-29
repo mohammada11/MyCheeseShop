@@ -33,6 +33,15 @@
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
             return item?.Quantity ?? 0;
         }
+        public int Count()
+        {
+            return _items.Count;
+        }
+
+        public decimal Total()
+        {
+            return _items.Sum(item => item.Cheese.Price * item.Quantity);
+        }
 
         public void SetItems(IEnumerable<CartItem> items)
         {
