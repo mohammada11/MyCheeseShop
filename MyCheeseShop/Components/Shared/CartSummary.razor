@@ -29,9 +29,11 @@
                     <td scope="col">@item.Total.ToString("C")</td>
                     @if(IsEditable)
                     {
-                        <td scope="">
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <button class="btn btn-warning mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">+</button>
-                        </td>
+                            <button class="btn btn-warning mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">-</button>
+                            <button class="btn btn-warning mt-1 mt-md-0" @onclick="() => RemoveItem(item)">x</button>
+                            </div>
                     }
                 </tr>
             }
@@ -58,13 +60,22 @@
         await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
-    
+
 
     private void IncreaseQuantity(CartItem item)
     {
         ShoppingCart.AddItem(item.Cheese, 1);
     }
 
-   
+    private void RemoveItem(CartItem item)
+    {
+        ShoppingCart.RemoveItem(item.Cheese);
+    }
+
+    private void DecreaseQuantity(CartItem item)
+    {
+        ShoppingCart.RemoveItem(item.Cheese, 1);
+    }
+
 
 }
