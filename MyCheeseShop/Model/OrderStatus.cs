@@ -5,7 +5,7 @@ namespace MyCheeseShop.Model
     public enum OrderStatus
     {
         None,
-        Displaced,
+        Placed,
         Dispatched,
         Cancelled
 

@@ -29,29 +29,32 @@
 
         public int GetQuantity(Cheese cheese)
         {
-            // return the quantity of the cheese in the cart
+            // Returns the quantity of the cheese in the cart
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
             return item?.Quantity ?? 0;
         }
         public int Count()
         {
+           
             return _items.Count;
         }
 
         public decimal Total()
         {
+            // Returns the total price of the item in the cart 
             return _items.Sum(item => item.Cheese.Price * item.Quantity);
         }
 
         public void SetItems(IEnumerable<CartItem> items)
         {
-            // set the items in the cart
+            // Set the items in the cart
             _items = items.ToList();
             OnCartUpdated?.Invoke();
         }
 
         public void RemoveItem(Cheese cheese)
         {
+            // Removes the selected item completely from the cart
             var item = _items.RemoveAll(item => item.Cheese.Id ==  cheese.Id);
             OnCartUpdated?.Invoke();
 
@@ -59,6 +62,7 @@
 
         public void RemoveItem(Cheese cheese, int quantity)
         {
+            // Decreases the quantity in the cart by 1 
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
             if(item is not null)
             {
@@ -68,9 +72,12 @@
             }
             OnCartUpdated?.Invoke();
 
-
         }
 
-
+        public void Clear()
+        { 
+           _items.Clear(); 
+           OnCartUpdated?.Invoke();
+        }
     }
 }
