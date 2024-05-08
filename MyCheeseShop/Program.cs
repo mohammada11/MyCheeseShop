@@ -19,6 +19,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuth
 
 builder.Services.AddScoped<ShoppingCart>();
 builder.Services.AddScoped<CheeseProvider>();
+builder.Services.AddScoped<UserProvider>();
 builder.Services.AddScoped<OrderProvider>();
 builder.Services.AddIdentityCore<User>()
  .AddRoles<IdentityRole>()
