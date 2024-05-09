@@ -18,10 +18,9 @@
 <div class="card mb-1" style="border: 1px solid #FFD700">
         <div class="card-body" style="background-color:#0000">
         <h4 class="card-title">Order Summary</h4>
-        <CartSummary />
+        <CartSummary/>
     </div>
 </div>
-
 
 
 @code {
@@ -50,6 +49,20 @@
 
     }
 
+    public void GoToCart()
+    {
+        NavigationManager.NavigateTo("cart");
+    }
+
+    private string GetFormattedName(User user)
+    {
+        return $"{user.FirstName} {user.LastName}";
+    }
+
+    private string GetFormattedAddress(User user)
+    {
+        return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.Postcode}";
+    }
 
     private sealed class PaymentDetails
     {
