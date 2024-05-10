@@ -1,5 +1,6 @@
 ﻿@page "/checkout"
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Context
@@ -8,8 +9,11 @@
 @attribute [Authorize]
 @inject NavigationManager NavigationManager
 @inject ShoppingCart ShoppingCart
+@inject UserProvider UserProvider
 @inject OrderProvider OrderProvider
+@inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
+@inject AuthenticationStateProvider AutheticationStateProvider
 
 
 
@@ -19,9 +23,69 @@
         <div class="card-body" style="background-color:#0000">
         <h4 class="card-title">Order Summary</h4>
         <CartSummary/>
-    </div>
+        </div>
 </div>
 
+<EditForm EditContext="editContext" OnValidSubmit="MakePayment">
+    <DataAnnotationsValidator />
+    <div class="row justify-content-center mb-2">
+        <div class="col-lg-6 col-12 mt-3">
+            <div class="card h-100" style="border: 1px solid #FFD700">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Customer Information</h4>
+                  <div class="form-group mb-1">
+                   <label class="form-label">Name</label>
+                        <input class="form-control" value="@GetFormattedName(user)" disabled />
+                  </div>
+                  <div class="form-group mb-1">
+                        <label class="form-label">Address</label>
+                        <input class="form-control" style="resize:none" value="@GetFormattedAddress(user)" disabled />
+                  </div>
+                  <div class="form-group mb-1">
+                        <label class="form-label">Name</label>
+                        <input class="form-control" value="@user.Email" disabled />
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2">
+        <div class="col-lg-6 col-12 mt-3">
+            <div class="card h-100" style="border: 1px solid #FFD700">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Payment</h4>
+                    <div class="form-group mb-1">
+                        <label class="form-label">Card Name</label>
+                        <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+                    </div>
+                    <div class="form-group mb-1">
+                        <label class="form-label">Card Number</label>
+                        <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
+                    </div>
+                    <div class="form-group mb-1">
+                        <label class="form-label">Expiry Date</label>
+                        <InputText class="form-control" placeholder="00-00-00" @bind-Value="paymentDetails.ExpiryDate" />
+                    </div>
+                    <div class="form-group mb-1">
+                        <label class="form-label">Security Code</label>
+                        <InputText class="form-control" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-lg-6 col-12 text-center">
+                            <button @onclick="GoToCart" class="btn btn-warning mr-2"> Back To Cart </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+  
+   
+
+    
+      
+
+</EditForm>
 
 @code {
 
@@ -29,6 +93,19 @@
     private PaymentDetails paymentDetails;
     private EditContext editContext;
     private bool isPaying;
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentDetails = new PaymentDetails();
+        editContext = new EditContext(paymentDetails);
+
+        var authState = await AutheticationStateProvider.GetAuthenticationStateAsync();
+        var username = authState!.User!.Identity!.Name!;
+        user = UserProvider.GetUserByUsername(username);
+
+    }
+
+
 
     private async Task MakePayment()
     {
