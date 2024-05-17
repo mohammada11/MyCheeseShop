@@ -24,35 +24,18 @@
                         </AuthorizeView>
                         <li class="navbar-text"> @context.User.Identity?.Name </li>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="/Account/Logout" Match="NavLinkMatch.All">Logout</NavLink>
+                            <NavLink class="btn btn-danger" href="/Account/Logout" Match="NavLinkMatch.All">Logout</NavLink>
                         </li>
                     </Authorized>
                     <NotAuthorized>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/Account/Login" Match="NavLinkMatch.Prefix">Login</NavLink>
+                        <li class="nav-item me-1">
+                            <NavLink class="btn btn-outline-dark" href="/Account/Login" Match="NavLinkMatch.Prefix">Login</NavLink>
                         </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/Account/Register" Match="NavLinkMatch.Prefix">Register</NavLink>
+                        <li class="nav-item me-1 mt-md-0">
+                            <NavLink class="btn btn-outline-dark" href="/Account/Register" Match="NavLinkMatch.Prefix">Register</NavLink>
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>
-            </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-              <AuthorizeView>
-                  <Authorized>
-                    <li class="nav-item">
-                        <NavLink class="btn btn-outline-warning" href="/Account/Logout" Match="NavLinkMatch.All">Logout</NavLink>
-                    </li>
-                  </Authorized>
-                  <NotAuthorized>
-                     <li class="nav-item">
-                        <NavLink class="btn btn-outline-warning" href="/Account/Login" Match="NavLinkMatch.Prefix">Login</NavLink>
-                     </li>
-                     <li class="nav-item">
-                        <NavLink class="btn btn-outline-warning" href="/Account/Register" Match="NavLinkMatch.Prefix">Register</NavLink>
-                     </li>
-                  </NotAuthorized>
-              </AuthorizeView>
             </ul>
         </div>
     </div>

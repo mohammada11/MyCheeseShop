@@ -81,11 +81,13 @@
                             <InputText class="form-control payment-form-input" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
                       </div>
                         <div>
-                            <button type="submit" @onclick="MakePayment" class="btn btn-warning mr-2"> Make Payment </button>
+                            <button type="submit" class="btn btn-warning d-flex align-items-center">
+                            <span>Make Payment</span>
                             @if(isPaying)
                             {
-                                <span class="visually-hidden"> Loading... </span>
+                               <span class="spinner-border spinner-border-sm float-none" aria-hidden="true"></span>
                             }
+                           </button>
                         </div>
                   </div>
               </div>

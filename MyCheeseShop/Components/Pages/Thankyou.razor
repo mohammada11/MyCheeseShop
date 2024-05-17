@@ -4,8 +4,40 @@
 @inject NavigationManager NavigationManager
 
 
-<h3> Thankyou </h3>
 
-@code {
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card" style="border: 2px solid #FFD700">
+                <div class="card">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            Purchase Complete!
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Thank you for ordering!</h5>
+                            <p class="card-text">Your order has been submitted!</p>
+                        </div>
+                        <div class="card-footer text-body-secondary">
+                            <div>
+                                <button @onclick="GoToHome" class="btn btn-warning mr-2"> Back To Home! </button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@code{
+
+    public void GoToHome()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
 
 }
