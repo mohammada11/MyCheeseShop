@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using MyCheeseShop.Context
+@using MyCheeseShop.Model
 @inject UserProvider UserProvider
 @inject OrderProvider OrderProvider
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -10,14 +11,67 @@
 
 <h3>MyCheeseShop - My Orders</h3>
 
-
-
-
-
-
-
-
+@if (orders is null)
+{
+    <p>Loading...</p>
+}
+else if (!orders.Any())
+{
+    <p>No orders found</p>
+}
+else
+{
+ <div class="row">
+    <div class="col-lg-6 col-12 mt-1">
+            <div class="card h-100" style="border: 2px solid #FFD700">
+            <div class="card-body">
+                <h4 class="card-title">Orders</h4>
+                <div class="row">
+                    @foreach (var order in orders)
+                    {
+                        <div class="col-12 mb-3">
+                            <div class="card" style="border: 2px solid #000000">
+                                <div class="card-body">
+                                    <h5 class="card-title">Order ID: @order.Id</h5>
+                                    <p class="card-text">Ordered: @order.Created.ToString("dd MMMM yyyy")</p>
+                                    <p class="card-text hide-on-small">Status: @order.Status.ToString()</p>
+                                    <p class="card-text">Total: @order.Total.ToString("C")</p>
+                                    <button class="btn btn-warning" @onclick="() => ShowDetails(order)">Show Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-12 mt-lg-1 mt-2">
+            <div class="card h-100" style="border: 2px solid #FFD700">
+            <div class="card-body">
+                <h4 class="card-title">Order Details</h4>
+                <OrderDetails Order="selectedOrder" />
+            </div>
+        </div>
+    </div>
+</div>
+}
 
 @code {
+    private IEnumerable<Order>? orders;
+    private Order? selectedOrder;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var authstate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var username = authstate.User!.Identity!.Name!;
+        var user = UserProvider.GetUserByUsername(username);
+        orders = await OrderProvider.GetOrdersAsync(user!);
+        selectedOrder = orders?.FirstOrDefault();
+    }
+
+    private void ShowDetails(Order order)
+    {
+        selectedOrder = order;
+    }
 
 }
