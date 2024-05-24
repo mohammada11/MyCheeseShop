@@ -4,33 +4,22 @@
 @inject NavigationManager NavigationManager
 
 
-
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card" style="border: 2px solid #FFD700">
-                <div class="card">
-                    <div class="card text-center">
-                        <div class="card-header">
-                            Purchase Complete!
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Thank you for ordering!</h5>
-                            <p class="card-text">Your order has been submitted!</p>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            <div>
-                                <button @onclick="GoToHome" class="btn btn-warning mr-2"> Back To Home! </button>
-                            </div>
-                        </div>
+<div class="card text-center">
+      <div class="row justify-content-center">
+           <div class="container-fluid">
+               <div class="card-body d-flex flex-column">
+                <img src="/img/happy_cheese.png" class="img-thumbnail mb-6" alt="...">
+                  <h3 class="card-title">Purchase Complete!</h3>
+                   <p class="card-text">Thank you ordering! Feel free to order more!</p>
+                   <div>
+                    <button @onclick="GoToHome" class="btn btn-outline-dark"> 🏠 Back To Home! </button>
                     </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+               </div>
+           </div>
+      </div>
+</div>
 
+ 
 
 @code{
 

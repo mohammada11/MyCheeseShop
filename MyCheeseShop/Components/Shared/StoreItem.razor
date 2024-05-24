@@ -3,15 +3,16 @@
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject ShoppingCart ShoppingCart
 
-<div class="card h-100">
+<div class="card mt-2 h-100">
       <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
+
     <div class="card-body d-flex flex-column">
-            <h6>
+        <h6>
             <span class="badge bg-success">@Cheese.Type</span>
             <span class="badge bg-danger">@Cheese.Strength</span>
             <span class="badge bg-dark">@Cheese.Price</span>
         </h6>
-            <div class="d-flex flex-column mb-3"> 
+            <div class="d-flex flex-column mb-5"> 
             <h5 class="card-title"> @Cheese.Name</h5>
             <p class="card-text"> @Cheese.Description</p>
             </div>
@@ -26,8 +27,8 @@
                             }
                         </InputSelect>
                     </div>
-                <div class="col-lg-6 col-12 mt-lg-0 mt-1">
-                    <button class="btn btn-warning position-relative w-75">
+                <div class="col-lg-6 col-12 mt-lg-0 mt-3">
+                    <button class="btn btn-warning position-relative w-100">
                         Add to cart
                         @if (ShoppingCart.GetQuantity(Cheese) > 0)
                         {

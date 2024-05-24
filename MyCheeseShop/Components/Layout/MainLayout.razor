@@ -53,8 +53,8 @@
                         <AuthorizeView Roles="Admin" Context="innerContext">
                             <span class="navbar-text me-3"> Admin </span>
                         </AuthorizeView>
-                        <li class="navbar-text"> @context.User.Identity?.Name </li>
-                        <li class="nav-item">
+                        <li class="navbar-text me-1"> @context.User.Identity?.Name </li>
+                        <li class="nav-item me-1">
                             <NavLink class="btn btn-outline-dark" href="/Account/Logout" Match="NavLinkMatch.All"> ❌ Logout</NavLink>
                         </li>
                     </Authorized>

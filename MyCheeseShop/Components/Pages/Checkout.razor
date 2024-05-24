@@ -20,7 +20,7 @@
 
 <h3> Checkout </h3>
 <div class="card mb-1" style="border: 1px solid #FFD700">
-        <div class="card-body" style="background-color:#0000">
+        <div class="card-body" >
         <h4 class="card-title">Order Summary</h4>
         <CartSummary/>
         <div>
@@ -33,10 +33,12 @@
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator />
 
+
+<div class="row"> 
  <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card mt-5">
+            <div class="col-md-7">
+                <div class="card mt-3">
                     <div class="card-body">
                         <h4 class="card-title text-center">Customer Information</h4>
                         <div class="form-group mb-3 text-center">
@@ -51,37 +53,36 @@
                             <label class="form-label">Email</label>
                             <input class="form-control text-center" value="@user.Email" disabled />
                         </div>
-
                     </div>
                 </div>
             </div>
       </div>
 </div>
   
-  <div class="container-fluid">
+<div class="container-fluid">
       <div class="row justify-content-center">
-          <div class="col-md-5">
-              <div class="card mt-5">
+          <div class="col-md-7">
+              <div class="card mt-3">
                   <div class="card-body">
-                      <h4 class="card-title text-center payment-card-title">Payment</h4>
-                      <div class="form-group mb-3">
-                          <label class="form-label payment-form-label">Card Name</label>
-                            <InputText class="form-control payment-form-input" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+                      <h4 class="card-title text-center">Payment</h4>
+                      <div class="form-group mb-3 text-center">
+                          <label>Card Name</label>
+                            <InputText class="form-control text-center" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
                       </div>
-                      <div class="form-group mb-3">
-                          <label class="form-label payment-form-label">Card Number</label>
-                          <InputText class="form-control payment-form-input" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
+                      <div class="form-group mb-3 text-center">
+                          <label>Card Number</label>
+                          <InputText class="form-control text-center" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
                       </div>
-                      <div class="form-group mb-3">
-                          <label class="form-label payment-form-label">Expiry Date</label>
-                            <InputText class="form-control payment-form-input" placeholder="00-00" @bind-Value="paymentDetails.ExpiryDate" />
+                      <div class="form-group mb-3 text-center">
+                          <label>Expiry Date</label>
+                            <InputText class="form-control text-center" placeholder="00-00" @bind-Value="paymentDetails.ExpiryDate" />
                       </div>
-                      <div class="form-group mb-3">
-                          <label class="form-label payment-form-label">Security Code</label>
-                            <InputText class="form-control payment-form-input" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
+                      <div class="form-group mb-3 text-center">
+                          <label>Security Code</label>
+                            <InputText class="form-control text-center" placeholder="000" @bind-Value="paymentDetails.SecurityCode" />
                       </div>
-                        <div>
-                            <button type="submit" class="btn btn-warning d-flex align-items-center">
+                            <div>
+                            <button type="submit" class="btn btn-warning d-flex">
                             <span>Make Payment</span>
                             @if(isPaying)
                             {
@@ -93,15 +94,11 @@
               </div>
           </div>
       </div>
-  </div>
-
- 
+   </div>
+</div>
    
+ <link rel="stylesheet" href="Checkout.css"/>
   
-   
-
- 
-
 </EditForm>
 
 @code {

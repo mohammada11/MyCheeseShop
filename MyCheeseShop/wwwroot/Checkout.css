@@ -1,0 +1,28 @@
+﻿body {
+
+     <style>
+        .card-custom 
+        {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .form-group-custom {
+            text-align: left;
+        }
+        .form-control-custom {
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #ffcc00;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner-custom {
+            margin-left: 10px;
+        }
+    </style>
+}
